@@ -1,0 +1,17 @@
+services:
+
+  db:
+    image: postgres
+    container_name: user_manager_db
+    ports:
+      - 5432:5432
+    tty: true
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+
+  adminer:
+    image: adminer
+    container_name: user_manager_adminer
+    ports:
+      - 8080:8080

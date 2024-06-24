@@ -150,12 +150,9 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.6-aarch64-linux)
-      racc (~> 1.4)
     nokogiri (1.16.6-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.6-x86_64-linux)
-      racc (~> 1.4)
+    pagy (8.4.5)
     parallel (1.24.0)
     parallel_tests (4.6.1)
       parallel
@@ -257,6 +254,11 @@ GEM
       rubocop (~> 1.41)
     rubocop-factory_bot (2.25.1)
       rubocop (~> 1.41)
+    rubocop-rails (2.25.0)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-rspec (2.29.2)
       rubocop (~> 1.40)
       rubocop-capybara (~> 2.17)
@@ -286,9 +288,7 @@ GEM
     zeitwerk (2.6.16)
 
 PLATFORMS
-  aarch64-linux
   arm64-darwin-23
-  x86_64-linux
 
 DEPENDENCIES
   apipie-rails
@@ -302,8 +302,9 @@ DEPENDENCIES
   factory_bot_rails (~> 6.4, >= 6.4.3)
   fuubar
   jbuilder
+  pagy (~> 8.4)
   parallel_tests
-  pg (~> 1.1)
+  pg
   pg_search
   puma (>= 5.0)
   rack-attack
@@ -311,13 +312,14 @@ DEPENDENCIES
   rails (~> 7.1.3, >= 7.1.3.2)
   rails-i18n (~> 7.0.0)
   rspec-rails (~> 6.1.0)
-  rubocop-rspec (~> 2.29, >= 2.29.2)
+  rubocop-rails
+  rubocop-rspec
   shoulda-matchers
   simplecov
   tzinfo-data
 
 RUBY VERSION
-   ruby 3.0.0p0
+   ruby 3.2.2p53
 
 BUNDLED WITH
-   2.2.3
+   2.4.10
