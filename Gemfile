@@ -14,10 +14,11 @@ gem "bootsnap", require: false
 gem "rack-cors"
 gem 'brakeman'
 gem 'rack-attack'
-gem 'pg_search'
 gem 'pagy', '~> 8.4'
+gem 'email_validator'
 
 group :development, :test do
+  gem 'faker'
   gem 'apipie-rails'
   gem 'byebug'
   gem 'debug', platforms: %i[mri mswin mswin64 mingw x64_mingw]
