@@ -14,6 +14,7 @@ gem "bootsnap", require: false
 gem "rack-cors"
 gem 'brakeman'
 gem 'rack-attack'
+gem 'pg_search'
 
 group :development, :test do
   gem 'apipie-rails'
