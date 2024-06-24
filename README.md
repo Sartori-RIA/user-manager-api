@@ -1,4 +1,7 @@
-# README
+# 4Asset - UserManager
+
+[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)
+[![Rails Style Guide](https://img.shields.io/badge/code_style-community-brightgreen.svg)](https://rails.rubystyle.guide)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
