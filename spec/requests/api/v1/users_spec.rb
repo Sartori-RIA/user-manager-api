@@ -2,40 +2,37 @@
 
 require 'rails_helper'
 
-#
-RSpec.describe Api::V1::UsersController, type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # User. As you add validations to User, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
-
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
-
-  # This should return the minimal set of values that should be in the headers
-  # in order to pass any filters (e.g. authentication) defined in
-  # UsersController, or in your router and rack
-  # middleware. Be sure to keep this updated too.
-  let(:valid_headers) do
-    {}
-  end
+RSpec.describe Api::V1::UsersController do
+  let!(:valid_headers) { { 'Content-Type' => 'Application/json', 'Accept' => 'Application/json' } }
+  let(:json) { JSON.parse(response.body, symbolized_name: true) }
 
   describe 'GET /index' do
+    before :all do
+      @users = create_list(:user, 5)
+    end
+
     it 'renders a successful response' do
-      User.create! valid_attributes
-      get users_url, headers: valid_headers, as: :json
-      expect(response).to be_successful
+      get api_v1_users_url, headers: valid_headers, as: :json
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'have to return in a json format' do
+      get api_v1_users_url, headers: valid_headers, as: :json
+      expect(response.content_type).to match(a_string_including('application/json'))
+    end
+
+    it 'return the users' do
+      get api_v1_users_url, headers: valid_headers, as: :json
+      expected_json = JSON.parse(@users.to_json, symbolized_name: true)
+      expect(json).to eq(expected_json)
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      user = User.create! valid_attributes
-      get user_url(user), as: :json
-      expect(response).to be_successful
+      user = create(:user)
+      get api_v1_user_url(user.id), as: :json
+      expect(response).to have_http_status(:ok)
     end
   end
 
@@ -43,14 +40,14 @@ RSpec.describe Api::V1::UsersController, type: :request do
     context 'with valid parameters' do
       it 'creates a new User' do
         expect do
-          post users_url,
-               params: { user: valid_attributes }, headers: valid_headers, as: :json
+          post api_v1_users_url,
+               params: { user: attributes_for(:user) }, headers: valid_headers, as: :json
         end.to change(User, :count).by(1)
       end
 
       it 'renders a JSON response with the new user' do
-        post users_url,
-             params: { user: valid_attributes }, headers: valid_headers, as: :json
+        post api_v1_users_url,
+             params: { user: attributes_for(:user) }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
@@ -59,15 +56,15 @@ RSpec.describe Api::V1::UsersController, type: :request do
     context 'with invalid parameters' do
       it 'does not create a new User' do
         expect do
-          post users_url,
-               params: { user: invalid_attributes }, as: :json
+          post api_v1_users_url,
+               params: { user: { name: 'a', email: 'a', phone: 'a', born_date: 'a' } }, as: :json
         end.not_to change(User, :count)
       end
 
       it 'renders a JSON response with errors for the new user' do
-        post users_url,
-             params: { user: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
+        post api_v1_users_url,
+             params: { user: attributes_for(:user, email: 'potato') }, headers: valid_headers, as: :json
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
@@ -75,22 +72,19 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
   describe 'PATCH /update' do
     context 'with valid parameters' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
-
       it 'updates the requested user' do
-        user = User.create! valid_attributes
-        patch user_url(user),
-              params: { user: new_attributes }, headers: valid_headers, as: :json
+        user = create(:user)
+        new_name = 'updated name'
+        patch api_v1_user_url(user),
+              params: { user: { name: new_name } }, headers: valid_headers, as: :json
         user.reload
-        skip('Add assertions for updated state')
+        expect(user.name).to eq new_name
       end
 
       it 'renders a JSON response with the user' do
-        user = User.create! valid_attributes
-        patch user_url(user),
-              params: { user: new_attributes }, headers: valid_headers, as: :json
+        user = create(:user)
+        patch api_v1_user_url(user),
+              params: { user: { name: 'updated name' } }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
@@ -98,10 +92,10 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
     context 'with invalid parameters' do
       it 'renders a JSON response with errors for the user' do
-        user = User.create! valid_attributes
-        patch user_url(user),
-              params: { user: invalid_attributes }, headers: valid_headers, as: :json
-        expect(response).to have_http_status(:unprocessable_entity)
+        user = create(:user)
+        patch api_v1_user_url(user),
+              params: { user: { email: 'asdadsa' } }, headers: valid_headers, as: :json
+        expect(response).to have_http_status(:unprocessable_content)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
     end
@@ -109,9 +103,9 @@ RSpec.describe Api::V1::UsersController, type: :request do
 
   describe 'DELETE /destroy' do
     it 'destroys the requested user' do
-      user = User.create! valid_attributes
+      user = create(:user)
       expect do
-        delete user_url(user), headers: valid_headers, as: :json
+        delete api_v1_user_url(user), headers: valid_headers, as: :json
       end.to change(User, :count).by(-1)
     end
   end

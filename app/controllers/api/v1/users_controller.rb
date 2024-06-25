@@ -33,19 +33,22 @@ class Api::V1::UsersController < ApplicationController
   error code: 404, desc: 'Not Found'
   error code: 422, desc: 'Unprocessable Entity'
   returns :user
-  def show; end
+  def show
+    render json: @user
+  end
 
   api :POST, '/v1/users', 'Add a User on DB'
   format 'json'
   param_group :user, as: :create
   error code: 404, desc: 'Not Found'
+  error code: 400, desc: 'Bad Request, you\'re forgetting something'
   error code: 422, desc: 'Unprocessable Entity'
   returns :user
   def create
     @user = User.new(user_params)
 
     if @user.save
-      render :show, status: :created, location: @user
+      render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -56,11 +59,12 @@ class Api::V1::UsersController < ApplicationController
   param :id, Integer, desc: 'User ID', required: true
   param_group :user
   error code: 404, desc: 'Not Found'
+  error code: 400, desc: 'Bad Request, you\'re forgetting something'
   error code: 422, desc: 'Unprocessable Entity'
   returns :user
   def update
     if @user.update(user_params)
-      render :show, status: :ok, location: @user
+      render json: @user, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -69,6 +73,7 @@ class Api::V1::UsersController < ApplicationController
   api :DELETE, '/v1/users/:id', 'Remove User from DB'
   param :id, Integer, desc: 'User ID', required: true
   error code: 404, desc: 'Not Found'
+  error code: 400, desc: 'Bad Request, you\'re forgetting something'
   def destroy
     @user.destroy!
   end
