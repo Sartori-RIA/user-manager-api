@@ -1,0 +1,23 @@
+POST http://localhost:3000/auth/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "user": {
+    "email": "lucas@email.com",
+    "password": "abc123"
+  }
+}
+
+###
+
+POST http://localhost:3000/auth/sign_in
+Content-Type: application/json
+Accept: application/json
+
+{
+  "user": {
+    "email": "admiral_ackbar@steuber.test",
+    "password": "abc123"
+  }
+}

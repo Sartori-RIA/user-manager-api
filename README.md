@@ -9,7 +9,8 @@
   * Docker OR PostgresSQL for the DB
 
 * Configuration
-  * if you're running with local db (with no docker), please update the file `.env` with the proper credentials
+  * Docker
+  * `docker-compose up -d`
 
 * Database Setup
   * `rails db:create`

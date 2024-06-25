@@ -3,6 +3,11 @@
 class ApplicationController < ActionController::API
   include Pagy::Backend
 
+  rescue_from CanCan::AccessDenied do |exception|
+    Rails.logger.debug { "Access denied on #{exception.action} #{exception.subject.inspect}" }
+    render json: { message: 'Access Denied!' }, status: :forbidden
+  end
+
   def pagy_render(collection, vars = {})
     pagy, records = pagy(collection, vars)
     pagy_headers_merge(pagy)

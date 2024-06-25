@@ -7,6 +7,10 @@ ruby '3.2.2'
 gem 'bootsnap', require: false
 gem 'brakeman'
 gem 'bundler-audit', '~> 0.9.1'
+gem 'cancancan'
+gem "devise", "~> 4.9"
+gem "devise-argon2", "~> 2.0"
+gem 'devise-i18n'
 gem 'dotenv'
 gem 'email_validator'
 gem 'pagy', '~> 8.4'
@@ -39,3 +43,5 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
+
+

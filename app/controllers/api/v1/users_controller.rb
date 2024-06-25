@@ -3,7 +3,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :set_user, only: %i[show update destroy]
+      load_and_authorize_resource
 
       def_param_group :user do
         param :user, Hash, action_aware: true do
@@ -16,6 +16,8 @@ module Api
 
       api :GET, '/v1/users/', 'Retrieves User from DB'
       format 'json'
+      error code: 401, desc: 'You need to Sign-In first'
+      error code: 403, desc: 'You\'re not allow to access here'
       error code: 404, desc: 'Not Found'
       error code: 422, desc: 'Unprocessable Entity'
       param :q, String, required: false, desc: 'Search the user by name or email'
@@ -32,6 +34,8 @@ module Api
       api :GET, '/v1/users/:id', 'Retrieves User from DB by ID'
       format 'json'
       param :id, Integer, desc: 'User ID', required: true
+      error code: 401, desc: 'You need to Sign-In first'
+      error code: 403, desc: 'You\'re not allow to access here'
       error code: 404, desc: 'Not Found'
       error code: 422, desc: 'Unprocessable Entity'
       returns :user
@@ -42,6 +46,8 @@ module Api
       api :POST, '/v1/users', 'Add a User on DB'
       format 'json'
       param_group :user, as: :create
+      error code: 401, desc: 'You need to Sign-In first'
+      error code: 403, desc: 'You\'re not allow to access here'
       error code: 404, desc: 'Not Found'
       error code: 400, desc: 'Bad Request, you\'re forgetting something'
       error code: 422, desc: 'Unprocessable Entity'
@@ -60,6 +66,9 @@ module Api
       format 'json'
       param :id, Integer, desc: 'User ID', required: true
       param_group :user
+      error code: 400, desc: 'Bad Request, you\'re forgetting something'
+      error code: 401, desc: 'You need to Sign-In first'
+      error code: 403, desc: 'You\'re not allow to access here'
       error code: 404, desc: 'Not Found'
       error code: 400, desc: 'Bad Request, you\'re forgetting something'
       error code: 422, desc: 'Unprocessable Entity'
@@ -74,17 +83,15 @@ module Api
 
       api :DELETE, '/v1/users/:id', 'Remove User from DB'
       param :id, Integer, desc: 'User ID', required: true
-      error code: 404, desc: 'Not Found'
       error code: 400, desc: 'Bad Request, you\'re forgetting something'
+      error code: 401, desc: 'You need to Sign-In first'
+      error code: 403, desc: 'You\'re not allow to access here'
+      error code: 404, desc: 'Not Found'
       def destroy
         @user.destroy!
       end
 
       private
-
-      def set_user
-        @user = User.find(params[:id])
-      end
 
       def user_params
         params.require(:user).permit(:name, :email, :phone, :born_date)
