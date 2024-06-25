@@ -6,5 +6,6 @@ FactoryBot.define do
     sequence(:email) { |n| "email#{n}@example.com" }
     phone { 'MyString' }
     born_date { '2024-06-24' }
+    password { 'abc123' }
   end
 end

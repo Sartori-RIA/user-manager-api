@@ -11,6 +11,7 @@ module Api
           param :email, String, required: true
           param :born_date, String, required: true
           param :phone, String, required: true
+          param :password, String, required: true
         end
       end
 
@@ -94,7 +95,7 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit(:name, :email, :phone, :born_date)
+        params.require(:user).permit(:name, :email, :phone, :born_date, :password)
       end
     end
   end
