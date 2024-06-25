@@ -11,6 +11,7 @@ gem 'cancancan'
 gem "devise", "~> 4.9"
 gem "devise-argon2", "~> 2.0"
 gem 'devise-i18n'
+gem 'devise-jwt'
 gem 'dotenv'
 gem 'email_validator'
 gem 'pagy', '~> 8.4'

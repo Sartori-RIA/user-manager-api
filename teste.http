@@ -4,8 +4,11 @@ Accept: application/json
 
 {
   "user": {
-    "email": "lucas@email.com",
-    "password": "abc123"
+    "name": "lucas",
+    "email": "lucas12@email.com",
+    "password": "abc123",
+    "phone": "123123123",
+    "born_date": "10-08-1996"
   }
 }
 
@@ -21,3 +24,10 @@ Accept: application/json
     "password": "abc123"
   }
 }
+
+###
+
+GET http://localhost:3000/api/v1/users
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNDEiLCJzY3AiOiJ1c2VyIiwiYXVkIjpudWxsLCJpYXQiOjE3MTkzMjMyODksImV4cCI6MTcxOTQwOTY4OSwianRpIjoiZjEyNWM4OTctNjIwOS00OTVlLWJjMjktMTBmNzc5YWZjNDA2In0.t37ZAQtwUvM_os53lNG29le7UHtMapaBJYkdoB-gcE0
