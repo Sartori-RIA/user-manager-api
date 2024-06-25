@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::API
   include Pagy::Backend
 
-  def pagy_render(collection, vars={})
+  def pagy_render(collection, vars = {})
     pagy, records = pagy(collection, vars)
     pagy_headers_merge(pagy)
     render json: records
@@ -11,7 +11,6 @@ class ApplicationController < ActionController::API
 end
 
 class IntegerValidator < Apipie::Validator::BaseValidator
-
   def initialize(param_description, argument)
     super(param_description)
     @type = argument
@@ -19,13 +18,14 @@ class IntegerValidator < Apipie::Validator::BaseValidator
 
   def validate(value)
     return false if value.nil?
+
     !!(value.to_s =~ /^[-+]?[0-9]+$/)
   end
 
-  def self.build(param_description, argument, options, block)
-    if argument == Integer
-      self.new(param_description, argument)
-    end
+  def self.build(param_description, argument, _options, _block)
+    return unless argument == Integer
+
+    new(param_description, argument)
   end
 
   def description
