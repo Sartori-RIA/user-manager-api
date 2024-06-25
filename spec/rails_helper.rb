@@ -8,6 +8,7 @@ require_relative '../config/environment'
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'devise/jwt/test_helpers'
+require "cancan/matchers"
 
 Rails.root.glob('spec/support/**/*.rb').sort.each { |f| require f }
 

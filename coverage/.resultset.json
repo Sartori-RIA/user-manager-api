@@ -1,6 +1,21 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/sartori/Sites/testes/4asset/UserManager/app/models/ability.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          null,
+          1,
+          13,
+          null,
+          12,
+          null,
+          null
+        ]
+      },
       "/Users/sartori/Sites/testes/4asset/UserManager/app/controllers/api/v1/users_controller.rb": {
         "lines": [
           null,
@@ -249,21 +264,6 @@
           null
         ]
       },
-      "/Users/sartori/Sites/testes/4asset/UserManager/app/models/ability.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          null,
-          1,
-          12,
-          null,
-          11,
-          null,
-          null
-        ]
-      },
       "/Users/sartori/Sites/testes/4asset/UserManager/app/models/application_record.rb": {
         "lines": [
           null,
@@ -301,7 +301,7 @@
         }
       }
     },
-    "timestamp": 1719326947
+    "timestamp": 1719327325
   },
   "(2/8)": {
     "coverage": {
