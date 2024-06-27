@@ -10,7 +10,7 @@ namespace :db do
       email = Faker::Internet.email(name:)
       phone = Faker::PhoneNumber.cell_phone
       born_date = 20.years.ago.to_date
-      password = "abc123"
+      password = 'abc123'
       User.create(email:, name:, born_date:, phone:, password:)
     end
   end

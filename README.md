@@ -15,6 +15,7 @@
 * Database Setup
   * `rails db:create`
   * `rails db:migrate`
+  * `rails db:seed`
   * `rails db:populate`
 
 * How to run the test suite

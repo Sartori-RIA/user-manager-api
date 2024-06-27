@@ -14,6 +14,6 @@ class User < ApplicationRecord
   include PgSearch::Model
   pg_search_scope :search_by, against: %i[name email]
 
-  validates :name, :email, :born_date, :phone, presence: true
-  validates :email, uniqueness: true, email: true
+  validates :name, :born_date, :phone, presence: true
+  validates :email, email: true, presence: true
 end

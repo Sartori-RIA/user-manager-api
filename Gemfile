@@ -8,8 +8,8 @@ gem 'bootsnap', require: false
 gem 'brakeman'
 gem 'bundler-audit', '~> 0.9.1'
 gem 'cancancan'
-gem "devise", "~> 4.9"
-gem "devise-argon2", "~> 2.0"
+gem 'devise', '~> 4.9'
+gem 'devise-argon2', '~> 2.0'
 gem 'devise-i18n'
 gem 'devise-jwt'
 gem 'dotenv'
@@ -44,5 +44,3 @@ group :test do
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
-
-

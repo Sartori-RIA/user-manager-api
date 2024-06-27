@@ -4,10 +4,10 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController do
   let!(:logged_user) { create(:user) }
-  let!(:valid_headers) {
+  let!(:valid_headers) do
     headers = { 'Content-Type' => 'Application/json', 'Accept' => 'Application/json' }
     Devise::JWT::TestHelpers.auth_headers(headers, logged_user)
-  }
+  end
   let(:json) { JSON.parse(response.body, symbolized_name: true) }
 
   describe 'GET /index' do

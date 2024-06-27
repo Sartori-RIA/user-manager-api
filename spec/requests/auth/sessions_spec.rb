@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Auth::SessionsController, type: :request do
+RSpec.describe Auth::SessionsController do
   let(:user) { create(:user) }
 
   it 'signs user in and returns JWT token' do
